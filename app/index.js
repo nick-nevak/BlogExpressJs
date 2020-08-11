@@ -1,5 +1,6 @@
 const express = require('express');
 const ejs = require('ejs');
+const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
@@ -11,7 +12,8 @@ const getPostController = require('./controllers/getPost');
 
 const app = express();
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views', path.join(__dirname, './views'));
+app.use(express.static(path.join(__dirname, './public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
