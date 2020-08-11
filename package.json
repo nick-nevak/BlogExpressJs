@@ -2,9 +2,9 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "",
-  "main": "app/index.js",
+  "main": "app/app.js",
   "scripts": {
-    "start": "nodemon app/index.js"
+    "start": "nodemon app/app.js"
   },
   "author": "Nikita",
   "license": "ISC",
