@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const expressSession = require('express-session');
+const flash = require('connect-flash');
 
-const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
-const validateMiddleware = require('./middleware/validationMiddleware');
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware');
 const authMiddleware = require('./middleware/authMiddleware');
 
 const newPostController = require('./controllers/newPost');
@@ -37,6 +37,7 @@ app.use("*", (req, res, next) => {
   loggedIn = req.session.userId;
   next();
 });
+app.use(flash());
 
   
 
@@ -57,7 +58,7 @@ app.get('/post/:id', getPostController);
 
 app.get('/posts/new', authMiddleware, newPostController);
 
-app.post('/posts/store', authMiddleware, validateMiddleware, storePostController);
+app.post('/posts/store', authMiddleware, storePostController);
 
 app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController);
 

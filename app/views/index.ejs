@@ -30,21 +30,20 @@
             <h2 class="post-title">
               <%= blogposts[i].title %>
             </h2>
-            <h3 class="post-subtitle">
+            <!-- <h3 class="post-subtitle">
               <%= blogposts[i].body %>
-            </h3>
+            </h3> -->
+            <div>
+              <%- blogposts[i].body %>
+            </div>
           </a>
           <p class="post-meta">Posted by
-            <a href="#"><%= blogposts[i].username %></a>
+            <a href="#"><%= blogposts[i].userid.username %></a>
             on <%= blogposts[i].datePosted.toDateString() %>
           </p>            
         </div>
         <hr>
         <% } %>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
       </div>
     </div>
   </div>

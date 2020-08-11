@@ -1,9 +1,16 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
 
+const redirectBackWithErrors = (req, res) =>{
+  req.flash('validationErrors', ['Invalid username or password']);
+  req.flash('formData',req.body);
+  res.redirect('/auth/login');
+}
+
 module.exports = async (req, res) => {
   const { username, password } = req.body;
   user = await User.findOne({ username: username });
+
   if (user) {
     same = await bcrypt.compare(password, user.password);
     if (same) {
@@ -11,11 +18,11 @@ module.exports = async (req, res) => {
       res.redirect('/')
     }
     else {
-      res.redirect('/auth/login')
+      redirectBackWithErrors(req, res);
     }
   }
   else {
-    res.redirect('/auth/login')
+    redirectBackWithErrors(req, res);
   }
 }
 
